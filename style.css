@@ -1,0 +1,615 @@
+@layer reset {
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Prevent font size inflation */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Remove default margin in favour of better control in authored CSS */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  [role="list"] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Set core body defaults */
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* Set shorter line heights on headings and interactive elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  /* Balance text wrapping on headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+  /* Make images easier to work with */
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  /* Make sure textareas without a rows attribute are not tiny */
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  /* Anything that has been anchored to should have extra scroll margin */
+  :target {
+    scroll-margin-block: 5ex;
+  }
+}
+
+@layer base {
+  :root {
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-black: hsl(0, 0%, 0%);
+
+    --accent-color-500: hsl(204, 100%, 34%);
+    --accent-color-600: hsl(206, 52%, 20%);
+
+    --clr-red-600: hsl(0, 91%, 33%);
+    --clr-red-700: hsl(0, 91%, 43%);
+    --clr-red-800: hsl(0, 91%, 53%);
+
+    --clr-green-400: rgba(41, 184, 41, 0.12);
+    --clr-green-500: rgb(41 184 60);
+
+    --clr-red-400: hsla(13, 91%, 34%, 0.424);
+    --clr-red-500: hsla(13, 100%, 50%, 0.902);
+
+    --clr-blue-400: hsla(205, 100%, 50%, 0.204);
+    --clr-blue-500: hsl(205, 100%, 53%);
+
+    --clr-brand-400: hsl(25, 88%, 75%);
+    --clr-brand-500: hsl(25, 88%, 66%);
+
+    --clr-brown-500: hsl(10, 5%, 25%);
+    --clr-brown-600: hsl(9, 7%, 21%);
+    --clr-brown-700: hsl(9, 8%, 16%);
+    --clr-brown-800: hsl(0, 6%, 15%);
+    --clr-brown-900: hsl(0, 6%, 13%);
+
+    --ff-heading: "Outfit", sans-serif;
+    --ff-body: "Fira Sans", sans-serif;
+
+    --fs-300: 0.875rem;
+    --fs-400: 1rem;
+    --fs-500: 1.125rem;
+    --fs-600: 1.25rem;
+    --fs-700: 1.5rem;
+    --fs-800: 2rem;
+    --fs-900: 3.75rem;
+    --fs-1000: 3.75rem;
+
+    @media (width > 760px) {
+      --fs-300: 0.875rem;
+      --fs-400: 1rem;
+      --fs-500: 1.25rem;
+      --fs-600: 1.5rem;
+      --fs-700: 2rem;
+      --fs-800: 3rem;
+      --fs-900: 5rem;
+      --fs-1000: 7.5rem;
+    }
+  }
+
+  /* in another selector for syntax highlighting reasons only */
+  :root {
+    --text-main: var(--clr-black);
+    --text-light: var(--clr-white);
+    --text-brand-main: var(--clr-red-800);
+    --text-brand: var(--clr-brand-500);
+
+    --background-accent: var(--accent-color-500);
+    --background-accent-dark: var(--accent-color-600);
+    --background-extra-light: var(--clr-brown-500);
+    --background-light: var(--clr-brown-600);
+    --background-main: var(--clr-brown-700);
+    --background-dark: var(--clr-brown-800);
+    --background-extra-dark: var(--clr-brown-900);
+
+    --font-size-heading-sm: var(--fs-700);
+    --font-size-heading-regular: var(--fs-800);
+    --font-size-heading-lg: var(--fs-900);
+    --font-size-heading-xl: var(--fs-1000);
+
+    --font-size-sm: var(--fs-300);
+    --font-size-regular: var(--fs-400);
+    --font-size-md: var(--fs-500);
+    --font-size-lg: var(--fs-600);
+
+    --border-radius-1: 0.25rem;
+    --border-radius-2: 0.5rem;
+    --border-radius-3: 0.75rem;
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--ff-body);
+    font-size: var(--font-size-regular);
+    color: var(--clr-white);
+    background-color: var(--background-main);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--ff-heading);
+    font-weight: 700;
+  }
+
+  a {
+    color: var(--text-light);
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--text-brand-main);
+  }
+
+  img {
+    border-radius: var(--border-radius-2);
+  }
+}
+
+@layer layout {
+  .section {
+    padding-block: 3.75rem;
+
+    @media (min-width: 760px) {
+      padding-block: 8rem;
+
+      &[data-padding="compact"] {
+        padding-block: 4.5rem;
+      }
+
+      &[data-padding="title-section"] {
+        padding-block: 3rem 0;
+      }
+    }
+  }
+
+  .wrapper {
+    --wrapper-max-width: 1130px;
+    --wrapper-padding: 1rem;
+
+    max-width: var(--wrapper-max-width);
+    padding-inline: var(--wrapper-padding);
+    margin-inline: auto;
+
+    box-sizing: border-box;
+  }
+
+  .wrapper[data-width="narrow"] {
+    --wrapper-max-width: 720px;
+  }
+
+  .wrapper[data-width="wide"] {
+    --wrapper-max-width: 1330px;
+  }
+
+  .container {
+    display: grid;
+    gap: 1rem;
+    @media (width > 760px) {
+      grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+      > :last-child {
+        grid-column: 1/3;
+      }
+    }
+  }
+
+  .equal-columns {
+    display: grid;
+    grid-auto-columns: 1fr;
+    gap: var(--equal-columns-gap, 1rem);
+    align-items: var(--column-layout-alignment, start);
+
+    &[data-gap="large"] {
+      --equal-columns-gap: 2rem;
+    }
+
+    &[data-vertical-alignment="centered"] {
+      --column-layout-alignment: center;
+    }
+
+    &[data-vertical-alignment="bottom"] {
+      --column-layout-alignment: end;
+    }
+
+    @media (width > 760px) {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+    }
+  }
+
+  /*Select any element that is a direct child of an element with the class flow, and is preceded by another element.*/
+  .flow > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+}
+@layer components {
+  .site-header {
+    position: relative;
+    z-index: 10;
+    padding-block: 1rem;
+    background-color: var(--background-light);
+    font-family: var(--ff-heading);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: var(--font-size-lg);
+  }
+  .ufc-logo {
+    height: 40px;
+    margin-left: 4rem;
+  }
+
+  .button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .button:focus-visible {
+    color: var(--text-brand-main);
+    outline: none;
+  }
+  .hamburger {
+    position: absolute; /* postition:absolute needs a postion:relative */
+    top: 50%; /* Positions the top edge of the element at the 50% mark of its parent container(site-header).*/
+    transform: translateY(
+      -50%
+    ); /* Allows you to shift the element up by 50% of its own height*/
+    left: 1rem;
+    color: white;
+  }
+
+  .primary-navigation {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    padding-top: 4.5rem;
+    background-color: var(--background-extra-dark);
+
+    li {
+      border-bottom: 2px solid var(--clr-white);
+    }
+    a {
+      text-decoration: none;
+      display: flex;
+      padding: 1rem 2rem;
+    }
+    a:hover {
+      color: var(--clr-white);
+      background-color: var(--background-accent);
+    }
+  }
+
+  /*Toggled using javascript*/
+  .primary-navigation.header-not-visible {
+    padding-top: 0rem; /* Remove padding when header is not visible */
+  }
+
+  :has([aria-expanded="true"]) .primary-navigation {
+    display: block;
+  }
+
+  .hero {
+    text-align: center;
+    font-size: var(--font-size-md);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /*blur the background*/
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url(https://www.ufc.com/images/styles/background_image_sm/s3/2021-07/070121-ufc-264-poirier-vs-mcgregor-3-announcement-changes-to-card_GettyImages-545757252.jpg?h=d1cb525d&itok=Tf174rDn);
+    background-size: cover;
+    background-position: center;
+    filter: blur(7px);
+    z-index: -1; /* Place behind content */
+  }
+
+  .hero__title {
+    color: var(--text-light);
+    font-size: var(--font-size-heading-lg);
+
+    > span {
+      display: block;
+      font-size: var(--font-size-heading-xl);
+      color: var(--text-brand-main);
+    }
+  }
+
+  .card {
+    display: grid;
+    font-size: var(--font-size-md);
+    color: var(--clr-white);
+    padding: 1rem;
+    background-color: var(--background-extra-light);
+    gap: var(--card-gap, 1rem);
+    border-radius: var(--border-radius-3);
+
+    img {
+      margin: 0 auto;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card__title {
+    font-size: var(--card-title-font-size, var(--font-size-heading-sm));
+    color: var(--card-title-color, var(--clr-white));
+  }
+
+  .results {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    gap: 1.5rem;
+
+    > * {
+      padding: 0.5rem;
+      border-radius: var(--border-radius-1);
+    }
+  }
+
+  .grid-auto-fill {
+    --auto-fit-min-col-size: 300px;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(var(--auto-fit-min-col-size), 100%), 1fr)
+    );
+    /* auto-fit or auto-fill */
+  }
+
+  .list-items {
+    display: grid;
+    margin-block: auto;
+    gap: 1rem 0.125rem;
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-radius: var(--border-radius-1);
+      background-color: var(--background-light);
+      font-size: var(--font-size-md);
+    }
+    li:last-child {
+      font-size: var(--font-size-lg);
+      grid-column: span 2;
+    }
+
+    li:is(:nth-child(1), :nth-child(4), :nth-child(5), :nth-child(8)) {
+      span {
+        background-color: var(--background-accent-dark);
+      }
+      background-color: var(--background-accent);
+    }
+    li:is(
+        :nth-child(2),
+        :nth-child(3),
+        :nth-child(6),
+        :nth-child(7),
+        :nth-child(9)
+      ) {
+      span {
+        background-color: var(--background-accent);
+      }
+      background-color: var(--background-accent-dark);
+    }
+
+    span {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .bento-grid {
+    --card-title-color: var(--clr-brand-400);
+    --card-title-font-size: var(--font-size-heading-regular);
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+      "card-one"
+      "card-two"
+      "card-three"
+      "card-four"
+      "card-five";
+
+    @media (width>650px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "card-one card-one"
+        "card-two card-five"
+        "card-three card-four";
+    }
+
+    @media (width > 1000px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "card-one card-one card-two"
+        "card-one card-one card-two"
+        "card-three card-four card-five";
+    }
+    .card > img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card:nth-child(1) {
+      grid-area: card-one;
+    }
+    .card:nth-child(2) {
+      grid-area: card-two;
+
+      @media (width > 1000px) {
+        display: grid;
+        gap: 1rem;
+        grid-template-rows: 1fr 1fr;
+
+        img {
+          grid-row: 1/3;
+        }
+        p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+    .card:nth-child(3) {
+      grid-area: card-three;
+    }
+    .card:nth-child(4) {
+      grid-area: card-four;
+    }
+    .card:nth-child(5) {
+      grid-area: card-five;
+    }
+  }
+
+  select {
+    border: 0;
+    color: var(--clr-white);
+    padding: 0.75rem 0.5rem;
+    border-radius: var(--border-radius-1);
+    background-color: var(--background-extra-light);
+  }
+
+  .no-results-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: var(--font-size-md);
+    border-radius: var(--border-radius-1);
+    background-color: var(--background-extra-light);
+  }
+
+  .site-footer {
+    text-align: center;
+    padding-block: 2rem;
+    background-color: var(--background-accent-dark);
+
+    a {
+      text-decoration: none;
+      color: var(--text-light);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--text-brand);
+      }
+    }
+  }
+  .site-footer__title {
+    font-size: var(--font-size-md);
+    cursor: pointer;
+  }
+}
+@layer utilities {
+  [hidden] {
+    display: none;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+  .font-size-lg {
+    font-size: var(--font-size-lg);
+  }
+  .wins {
+    color: var(--clr-green-500);
+    background-color: var(--clr-green-400);
+  }
+  .losses {
+    color: var(--clr-red-500);
+    background-color: var(--clr-red-400);
+  }
+  .draws {
+    color: var(--clr-blue-500);
+    background-color: var(--clr-blue-400);
+  }
+
+  .section-title {
+    padding: 1rem;
+    color: var(--text-brand-main);
+    background-color: var(--background-extra-light);
+    font-size: var(--font-size-heading-regular);
+  }
+  .title {
+    padding-block: 1rem;
+    color: var(--text-brand-main);
+    border-bottom: var(--text-brand-main) solid 1rem;
+    font-size: var(--font-size-heading-lg);
+  }
+  .background-extra-dark {
+    background-color: var(--background-extra-dark);
+  }
+  .background-accent-dark {
+    background-color: var(--background-accent-dark);
+  }
+}
